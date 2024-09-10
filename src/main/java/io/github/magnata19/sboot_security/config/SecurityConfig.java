@@ -18,7 +18,9 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(
+            SenhaMasterAuthenticationProvider provider,
+            HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(customizer -> {
                     customizer.requestMatchers("/public").permitAll();
@@ -26,6 +28,7 @@ public class SecurityConfig {
                 })
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(Customizer.withDefaults())
+                .authenticationProvider(provider)
                 .build();
     }
 
@@ -40,7 +43,7 @@ public class SecurityConfig {
         UserDetails adminUser = User.builder()
                 .username("admin")
                 .password(passwordEncoder().encode("admin"))
-                .roles("USER","ADMIN")
+                .roles("ADMIN")
                 .build();
 
         return new InMemoryUserDetailsManager(commonUser, adminUser);
