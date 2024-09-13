@@ -2,6 +2,7 @@ package io.github.magnata19.sboot_security.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,12 @@ public class FooController {
     @GetMapping("/public")
     public ResponseEntity<String> publicRoute() {
         return  ResponseEntity.ok("Rota public ok!");
+    }
+
+    @GetMapping("/admin")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<String> adminRoute() {
+        return  ResponseEntity.ok("Rota admin ok!");
     }
 
     @GetMapping("/private")

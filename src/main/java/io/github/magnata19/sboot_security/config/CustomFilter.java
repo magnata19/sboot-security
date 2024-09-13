@@ -29,7 +29,7 @@ public class CustomFilter extends OncePerRequestFilter {
                 Authentication authentication = new UsernamePasswordAuthenticationToken(
                         "Davidson Pacifico",
                         "123",
-                        List.of(new SimpleGrantedAuthority("ADMIN"))
+                        List.of(new SimpleGrantedAuthority("USER"))
                 );
                 SecurityContext context = SecurityContextHolder.getContext();
                 context.setAuthentication(authentication);

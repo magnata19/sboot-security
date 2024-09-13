@@ -11,20 +11,21 @@ import java.util.List;
 
 @Component
 public class SenhaMasterAuthenticationProvider implements AuthenticationProvider {
+
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-
-        String login = authentication.getName();
+        String username = authentication.getName();
         String password = (String) authentication.getCredentials();
 
-        String loginMaster = "master";
-        String passwordMaster = "master123";
+        String newUsername = "master";
+        String newPassword = "@123";
 
-        if(loginMaster.equals(login) &&  passwordMaster.equals(password)){
+        if(newUsername.equals(username) && newPassword.equals(password)) {
             return new UsernamePasswordAuthenticationToken(
-                    "usuário master",
+                    "Davidson Autenticado via Provider",
                     null,
-                    List.of(new SimpleGrantedAuthority("ADMIN")));
+                    List.of(new SimpleGrantedAuthority("ADMIN"))
+            );
         }
         return null;
     }
