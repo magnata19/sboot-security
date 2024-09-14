@@ -21,8 +21,8 @@ public class FooController {
 
     @GetMapping("/admin")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<String> adminRoute() {
-        return  ResponseEntity.ok("Rota admin ok!");
+    public ResponseEntity<String> adminRoute(Authentication authentication) {
+        return  ResponseEntity.ok("Rota admin ok! User: " + authentication.getName());
     }
 
     @GetMapping("/private")
