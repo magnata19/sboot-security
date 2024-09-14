@@ -22,16 +22,14 @@ public class GrupoController {
     @Transactional
     @PostMapping("/grupos")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Grupo> salvar(@RequestBody Grupo grupo, Authentication authentication) {
-        log.info("via salvar grupo, user: "+ authentication.getName());
+    public ResponseEntity<Grupo> salvar(@RequestBody Grupo grupo) {
         Grupo grupoSalvo = grupoRepository.save(grupo);
         return ResponseEntity.ok(grupoSalvo);
     }
 
     @GetMapping("/listargrupos")
-    public ResponseEntity<List<Grupo>> listar(Authentication authentication) {
+    public ResponseEntity<List<Grupo>> listar() {
         List<Grupo> all = grupoRepository.findAll();
-        log.info("Via listar grupos, user: " + authentication.getName());
         return ResponseEntity.ok(all);
     }
 }
