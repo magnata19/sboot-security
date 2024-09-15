@@ -1,10 +1,9 @@
 package io.github.magnata19.sboot_security.domain.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -16,4 +15,7 @@ public class Usuario {
     private String login;
     private String password;
     private String nome;
+
+    @Transient // essa annotation ignora o mapeanmento jpa
+    private List<String> permissoes;
 }
